@@ -82,7 +82,7 @@ function inicializarYjsEIndexedDB() {
 
         if (email && password) {
             if (validateUser(email, password)) {
-                alert('Usuário ${email} logado com sucesso!');
+                alert(`Usuário ${email} logado com sucesso!`);
                 // Redirecionar para o dashboard
                 window.location.href = '../pages/dashboard.html';
             } else {
@@ -99,7 +99,7 @@ function inicializarYjsEIndexedDB() {
 
         if (email && password) {
             if (saveUser(email, password)) {
-                alert('Usuário ${email} registrado com sucesso!');
+                alert(`Usuário ${email} registrado com sucesso!`);
                 showLoginBtn.click();
             } else {
                 alert('Usuário já está registrado!');
