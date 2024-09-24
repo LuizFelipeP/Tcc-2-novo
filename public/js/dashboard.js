@@ -22,6 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } else {
         window.location.href = '/index.html';
+
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+              .then((registration) => {
+                  console.log('Service Worker registrado com sucesso:', registration.scope);
+              })
+              .catch((error) => {
+                  console.error('Falha ao registrar o Service Worker:', error);
+              });
+        }
+
     }
 });
 
@@ -75,6 +87,15 @@ function carregarGastos() {
             });
             actionTd.appendChild(removeBtn);
 
+            const editBtn = document.createElement('button');
+            editBtn.classList.add('edit-expense-btn');
+            editBtn.innerHTML = '✏️'; // Ícone de lápis
+            editBtn.addEventListener('click', () => {
+                window.location.href = `../pages/editar.html?key=${encodeURIComponent(key)}`;
+            });
+            actionTd.appendChild(editBtn);
+
+
             // Adiciona os elementos à linha (tr) na ordem correta
             tr.appendChild(statusTd);
             tr.appendChild(userTd);
@@ -90,7 +111,10 @@ function carregarGastos() {
         console.log('Gastos carregados com sucesso');
     });
 
+
 }
+
+
 
 // Função para remover gasto
 function removerGasto(key) {
@@ -115,4 +139,9 @@ const logoutBtn = document.getElementById('logout-btn');
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('user');
     window.location.href = '/index.html';
+
+
+
+
 });
+
